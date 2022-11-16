@@ -1,0 +1,10 @@
+<!-- <pre>{{ notifications$ | async | json }}</pre> -->
+
+<h2 *ngIf="notifications$ | async">Warnings</h2>
+<app-notifications-list [items]="warnings$ | async"></app-notifications-list>
+
+<h2>INFO</h2>
+<app-notifications-list [items]="infos$ | async"></app-notifications-list>
+
+<h2>ERRORS</h2>
+<app-notifications-list [items]="errors$ | async"></app-notifications-list>

@@ -1,0 +1,18 @@
+<div>
+    {{isExp(products[0])}}
+  <h2>Current count = {{ count }}</h2>
+  <h1>TOTAL ITEMS = {{ products | badPractice }}</h1>
+  <button (click)="doIt()">לא עושה כלום</button>
+  <button (click)="changePrice()">ChangePrice</button>
+
+  <button (click)="addNew()">Add new product</button>
+  <button (click)="updateProduct()">Update product</button>
+  <ul>
+    <li
+      *ngFor="let item of products"
+      [class.exp]="item.price | isExp: maxPrice"
+    >
+      {{ item.name }}
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,7 @@
+<ul *ngIf="items?.length; else emptyTemplate">
+  <li *ngFor="let item of items">{{ item.message }} - {{ item.type }}</li>
+</ul>
+
+<ng-template #emptyTemplate>
+  <h2>No data...</h2>
+</ng-template>

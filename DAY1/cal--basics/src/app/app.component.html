@@ -1,0 +1,15 @@
+<!-- <app-my-list></app-my-list> -->
+<button (click)="showAll = !showAll">SHOW/HIDE</button>
+<h2>CURRENT COUNTER = {{ count$ | async }}</h2>
+<app-counter></app-counter> 
+
+<app-notifications-root></app-notifications-root>
+
+
+<ng-container *ngIf="showAll">
+  <app-counter></app-counter>
+  <app-counter></app-counter>
+  <app-counter></app-counter>
+  <app-counter></app-counter>
+  <app-counter></app-counter>
+</ng-container>
