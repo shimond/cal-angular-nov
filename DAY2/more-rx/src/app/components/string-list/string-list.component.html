@@ -1,0 +1,9 @@
+<div>
+  <div
+    *ngFor="let item of items"
+    class="item"
+    (click)="setSelected(item)"
+    [class.selected]="item === selectedItem">
+    {{ item }}
+  </div>
+</div>
