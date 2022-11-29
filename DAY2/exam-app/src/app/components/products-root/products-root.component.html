@@ -1,0 +1,11 @@
+<h2>SELECTED PRODUCT</h2>
+<div>
+  {{ selectedProduct$ | async | json }}
+</div>
+
+<input [formControl]="searchFormControl" />
+<div>
+  <div *ngFor="let item of filterProducts$ | async">
+    <button (click)="setSelectedItem(item)">Select</button> {{ item.name }}
+  </div>
+</div>

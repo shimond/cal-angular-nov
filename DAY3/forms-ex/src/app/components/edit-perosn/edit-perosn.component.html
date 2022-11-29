@@ -1,0 +1,59 @@
+<div [formGroup]="perosnForm">
+  <div>
+    <div>Name</div>
+    <div>
+      <input type="text" formControlName="name" />
+    </div>
+    <div *ngIf="perosnForm.controls.name.errors as errors" class="error">
+      {{ errors | json }}
+    </div>
+  </div>
+  <div>
+    <div>Age</div>
+    <div>
+      <app-num-input [stepSize]="5" formControlName="age"></app-num-input>
+      <!-- <input type="number"  /> -->
+    </div>
+    <div *ngIf="perosnForm.controls.age.errors as errors" class="error">
+      {{ errors | json }}
+    </div>
+  </div>
+  <div>Is Admin : <input type="checkbox" formControlName="isAdmin" /></div>
+
+  <div>
+    <div>Email</div>
+    <div>
+      <input type="email" [disabled]="true" formControlName="email" />
+      <button (click)="disableEmail()">Disable email</button>
+    </div>
+    <div *ngIf="perosnForm.controls.email.errors as errors" class="error">
+      {{ errors | json }}
+    </div>
+  </div>
+  <div>
+    <h2>Hobbies</h2>
+    <div
+      *ngFor="let group of perosnForm.controls.hobbies.controls;
+        let index = index">
+      <div [formGroup]="group">
+        <button (click)="removeHobbie(index)">Remove</button> <input formControlName="name" /> |
+        <input formControlName="rating" />
+      </div>
+    </div>
+    <button (click)="addNewHobbie()">Add new hobbie</button>
+  </div>
+
+  <h2>Form errors:</h2>
+  <div>{{ perosnForm.errors | json }}</div>
+  <button [disabled]="perosnForm.invalid">SAVE</button>
+</div>
+<div>
+  <div>
+    <h2>Form Value</h2>
+    <pre>{{ perosnForm.getRawValue() | json }}</pre>
+  </div>
+  <div>
+    <h2>Object Value</h2>
+    <pre>{{ personToEdit | json }}</pre>
+  </div>
+</div>

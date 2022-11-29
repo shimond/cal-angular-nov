@@ -1,6 +1,7 @@
+{{ selectedItem$ | async }}
 <div>
   <input [formControl]="searchControl" />
-<button (click)="addItem()">Add item</button>
+  <button (click)="addItem()">Add item</button>
 
   <button (click)="startPlay()">start</button>
   <button (click)="stopPlay()">stop</button>
@@ -8,9 +9,12 @@
   <h2>Length - {{ len$ | async }}</h2>
   <span *ngIf="isBusy"> Loading...</span>
 </div>
-<app-string-list [items]="items$ | async"></app-string-list>
 
+<app-string-list *ngIf="!isBusy"
+  [selectedItem]="selectedItem$ | async"
+  [items]="items$ | async"
+  (itemSelected)="setSelected($event)"
+></app-string-list>
 
-<app-string-list [items]="simpleItems"></app-string-list>
 
 <hr />

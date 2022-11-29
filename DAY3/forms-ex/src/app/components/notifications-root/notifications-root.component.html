@@ -1,3 +1,5 @@
+<!-- <pre>{{ notifications$ | async | json }}</pre> -->
+
 <h2 *ngIf="notifications$ | async">Warnings</h2>
 <app-notifications-list [items]="warnings$ | async"></app-notifications-list>
 

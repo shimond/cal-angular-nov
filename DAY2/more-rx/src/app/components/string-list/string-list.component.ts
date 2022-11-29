@@ -10,8 +10,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class StringListComponent implements OnInit, OnChanges {
   @Input() items: string[];
   @Input() selectedItem: string | null = null;
-  @Output() itemSelected = new EventEmitter<string>();
-  
+  @Output() itemSelected = new EventEmitter<number>();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -22,8 +22,8 @@ export class StringListComponent implements OnInit, OnChanges {
     // console.log('OnChanged', changes);
   }
 
-  setSelected(item: string) {
-    this.itemSelected.emit(item);
+  setSelected(itemIndex: number) {
+    this.itemSelected.emit(itemIndex);
   }
 
 }
