@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { Person } from 'src/app/model/person.model';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, NonNullableFormBuilder, ValidationErrors, Validators } from '@angular/forms';
+import { delay, map, Observable, of } from 'rxjs';
+import { Address, Person } from 'src/app/model/person.model';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-edit-perosn',
@@ -9,7 +11,9 @@ import { Person } from 'src/app/model/person.model';
 })
 export class EditPerosnComponent implements OnInit {
   personToEdit: Person = {
-    id: 1, name: 'David', email: 'David@gmail.com', age: 20, isAdmin: true,
+    id: 1, name: 'ari', email: 'David@gmail.com', age: 20, isAdmin: true,
+    workAddress: { country: 'Israel', city: 'Jerusalem' },
+    homeAddress: { country: 'Qatar', city: 'Doha' },
     hobbies: [
       { name: 'C#', rating: 2 },
       { name: 'VB6', rating: 1 },
@@ -19,7 +23,40 @@ export class EditPerosnComponent implements OnInit {
   };
   temp = 'A';
 
-  constructor(private fb: FormBuilder) { }
+  validateNameAsync(control: AbstractControl): Observable<ValidationErrors | null> {
+    return this.userService.validateUserName(control.value).
+      pipe(map(res => {
+        if (res) {
+          return null;
+        } else {
+          return { "AsyncInServiceValidation": true }
+        }
+      }));
+  }
+
+  validateName(control: AbstractControl): ValidationErrors | null {
+    const s: string = control.value;
+    if (s.includes(this.temp)) {
+      return {
+        'includes': { temp: this.temp }
+      };
+    }
+    return null;
+  }
+
+  validateWorkAddress(control: AbstractControl): ValidationErrors | null {
+    if (control.value) {
+      const address: Address = control.value;
+      if (address.city === address.country) {
+        return { "CityCountrySame": true };
+      }
+    }
+
+    return null;
+  }
+
+
+  constructor(private fb: FormBuilder, private userService: UsersService) { }
 
   arr: FormGroup<{
     name: FormControl<string>,
@@ -28,12 +65,23 @@ export class EditPerosnComponent implements OnInit {
 
   perosnForm = this.fb.nonNullable.group({
     id: [-1],
-    name: ['', [Validators.required, Validators.minLength(2), (e: AbstractControl) => this.validateName(e)]],
+    name: ['',
+      {
+        validators: [Validators.required, Validators.minLength(2),
+        (e: AbstractControl) => this.validateName(e)],
+        asyncValidators: [(a: AbstractControl) => this.validateNameAsync(a)]
+      }
+    ],
     email: ['', [Validators.email]],
     age: [0, [Validators.min(0)]],
     isAdmin: [false],
+    workAddress: new FormControl<Address>(null, { validators: [this.validateWorkAddress] }),
+    homeAddress: [{ country: '', city: '' }],
     hobbies: this.fb.nonNullable.array(this.arr),
-  }, { validators: [this.validateAll] });
+  }, {
+    asyncValidators: [],
+    validators: [this.validateAll]
+  });
 
   ngOnInit(): void {
     this.addHobbiesGroups(this.personToEdit);
@@ -61,23 +109,13 @@ export class EditPerosnComponent implements OnInit {
   }
 
   validateAll(control: AbstractControl): ValidationErrors | null {
-    console.log(control.value)
     const p: Person = control.getRawValue();
     if (p.email.includes('a') && p.name.length > 5) {
       return { "a-&&->-then-5": true };
     }
     return null;
   }
-  validateName(control: AbstractControl): ValidationErrors | null {
-    const s: string = control.value;
-    if (s.includes(this.temp)) {
-      return {
-        'includes': { temp: this.temp }
-      };
-    }
-    return null;
 
-  }
 
   disableEmail() {
     this.perosnForm.controls.email.disable();

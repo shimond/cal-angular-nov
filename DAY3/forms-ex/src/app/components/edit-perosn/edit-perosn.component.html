@@ -9,6 +9,19 @@
     </div>
   </div>
   <div>
+    <h2>Work Address:</h2>
+    <app-address-input formControlName="workAddress"></app-address-input>
+    <div *ngIf="perosnForm.controls.workAddress.errors as errors" class="error">
+      {{ errors | json }}
+    </div>
+  </div>
+
+  <div>
+    <h2>Home Address:</h2>
+    <app-address-input formControlName="homeAddress"></app-address-input>
+  </div>
+
+  <div>
     <div>Age</div>
     <div>
       <app-num-input [stepSize]="5" formControlName="age"></app-num-input>

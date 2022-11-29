@@ -13,6 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Test1Component } from './components/test1/test1.component';
 import { EditPerosnComponent } from './components/edit-perosn/edit-perosn.component';
 import { NumInputComponent } from './components/num-input/num-input.component';
+import { AddressInputComponent } from './components/address-input/address-input.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,10 +27,12 @@ import { NumInputComponent } from './components/num-input/num-input.component';
     NotificationsListComponent,
     Test1Component,
     EditPerosnComponent,
-    NumInputComponent
+    NumInputComponent,
+    AddressInputComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule
   ],
