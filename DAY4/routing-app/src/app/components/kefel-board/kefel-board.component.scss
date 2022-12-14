@@ -1,0 +1,18 @@
+.main {
+  margin: 10px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(5, 1fr);
+  .item {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 9px;
+    &:hover {
+      cursor: pointer;
+      background-color: aqua;
+    }
+  }
+}

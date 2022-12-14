@@ -1,0 +1,6 @@
+<button *ngIf="isAuth$ | async; else loginTemplate" (click)="doLogout()" >
+  logout
+</button>
+<ng-template #loginTemplate>
+  <button (click)="doLogin()">login</button>
+</ng-template>

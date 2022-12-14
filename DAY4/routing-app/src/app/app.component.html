@@ -1,0 +1,35 @@
+<h1>MY APP ROOT</h1>
+<app-login></app-login>
+<marquee>עבד טיל פעם</marquee>
+<div>
+  <a routerLinkActive="active-url" routerLink="home">Home page</a> |
+  <a routerLinkActive="active-url" routerLink="about">About</a> |
+  <ng-container *ngIf="true">
+    <a
+      routerLinkActive="active-url"
+      [routerLinkActiveOptions]="{ exact: true }"
+      routerLink="kefel"
+      >Kefel</a
+    >
+    |
+    <a
+      routerLinkActive="active-url"
+      routerLink="kefel"
+      [queryParams]="{ size: 10 }"
+      >Kefel (SIZE 10)</a
+    >
+    |
+
+    <a
+      routerLinkActive="active-url"
+      routerLink="kefel"
+      [queryParams]="{ size: 3 }"
+      >Kefel (SIZE 3)</a
+    >
+  </ng-container>
+
+  <button (click)="navigateToAbout()">Go to about</button>
+</div>
+<router-outlet></router-outlet>
+
+<h2>זה הלמטה</h2>
