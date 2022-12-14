@@ -11,10 +11,17 @@ import { AuthGuard } from "./services/guards/auth.guard";
 export const APP_ROUTES: Route[] = [
     { path: 'home', component: HomeComponent },
     { path: 'about', component: AboutComponent },
-    { path: 'kefel', component: KefelBoardComponent, canActivate:[AuthGuard], canDeactivate:[] },
+    {
+        path: 'kefel', component: KefelBoardComponent, canActivate: [AuthGuard],
+        canDeactivate: []
+    },
     { path: 'login', component: LoginComponent },
     { path: 'unauth', component: NotAllowedPageComponent },
     { path: 'calc-result/:xValue/:yValue', component: KefelResultComponent },
+    {
+        path: 'admin', loadChildren: () => import('./features/admin/admin.module').then(o => o.AdminModule),
+        canLoad: [AuthGuard]
+    },
     { path: '', pathMatch: 'full', redirectTo: 'home' },
     { path: '**', component: PageNotFoundComponent }
 

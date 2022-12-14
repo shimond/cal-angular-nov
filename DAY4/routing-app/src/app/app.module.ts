@@ -12,6 +12,10 @@ import { KefelResultComponent } from './components/kefel-result/kefel-result.com
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { LoginComponent } from './components/login/login.component';
 import { NotAllowedPageComponent } from './components/not-allowed-page/not-allowed-page.component';
+import { MyPanelModule } from './shared/my-panel/my-panel.module';
+import { CoreModule } from './core/core.module';
+import { ShowIfAuthDirective } from './shared/show-if-auth/directives/show-if-auth.directive';
+import { ShowIfAuthModule } from './shared/show-if-auth/show-if-auth.module';
 
 @NgModule({
   declarations: [
@@ -26,8 +30,10 @@ import { NotAllowedPageComponent } from './components/not-allowed-page/not-allow
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
-    RouterModule.forRoot(APP_ROUTES)
+    CoreModule,
+    RouterModule.forRoot(APP_ROUTES),
+    MyPanelModule,
+    ShowIfAuthModule
   ],
   providers: [
 

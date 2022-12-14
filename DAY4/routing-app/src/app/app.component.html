@@ -2,9 +2,10 @@
 <app-login></app-login>
 <marquee>עבד טיל פעם</marquee>
 <div>
+  <a routerLinkActive="active-url" *appShowIfAuth routerLink="admin">Admin</a> |
   <a routerLinkActive="active-url" routerLink="home">Home page</a> |
   <a routerLinkActive="active-url" routerLink="about">About</a> |
-  <ng-container *ngIf="true">
+  <ng-container *appShowIfAuth>
     <a
       routerLinkActive="active-url"
       [routerLinkActiveOptions]="{ exact: true }"
@@ -28,8 +29,9 @@
     >
   </ng-container>
 
-  <button (click)="navigateToAbout()">Go to about</button>
+  <button *appShowIfAuth (click)="navigateToAbout()">Go to about</button>
 </div>
-<router-outlet></router-outlet>
-
+<app-my-panel title="My Router area">
+  <router-outlet></router-outlet>
+</app-my-panel>
 <h2>זה הלמטה</h2>
