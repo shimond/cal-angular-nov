@@ -1,4 +1,4 @@
-<h1>MY APP ROOT</h1>
+<h1 appHoverMe>MY APP ROOT</h1>
 <app-login></app-login>
 <marquee>עבד טיל פעם</marquee>
 <div>
@@ -29,9 +29,9 @@
     >
   </ng-container>
 
-  <button *appShowIfAuth (click)="navigateToAbout()">Go to about</button>
+  <button *appShowIfAuth (click)="navigateToAbout()" appHoverMe>Go to about</button>
 </div>
 <app-my-panel title="My Router area">
   <router-outlet></router-outlet>
 </app-my-panel>
-<h2>זה הלמטה</h2>
+<h2 appHoverMe>זה הלמטה</h2>

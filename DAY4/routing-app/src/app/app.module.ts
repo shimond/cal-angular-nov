@@ -16,6 +16,7 @@ import { MyPanelModule } from './shared/my-panel/my-panel.module';
 import { CoreModule } from './core/core.module';
 import { ShowIfAuthDirective } from './shared/show-if-auth/directives/show-if-auth.directive';
 import { ShowIfAuthModule } from './shared/show-if-auth/show-if-auth.module';
+import { HoverMeDirective } from './direcvies/hover-me.directive';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ShowIfAuthModule } from './shared/show-if-auth/show-if-auth.module';
     PageNotFoundComponent,
     LoginComponent,
     NotAllowedPageComponent,
+    HoverMeDirective,
   ],
   imports: [
     BrowserModule,
